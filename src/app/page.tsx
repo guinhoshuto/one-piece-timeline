@@ -1,3 +1,6 @@
+import dotenv from 'dotenv'
+dotenv.config()
+
 type Event = {
     period: string
     date: string
@@ -6,7 +9,7 @@ type Event = {
 }
 
 export default async function Home() {
-  const data = await fetch('/api')
+  const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`)
   const timeline: Event[] = await data.json()
 
   return (
