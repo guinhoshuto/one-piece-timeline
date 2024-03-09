@@ -6,7 +6,7 @@ type Event = {
 }
 
 export default async function Home() {
-  const data = await fetch('http://localhost:3001/api')
+  const data = await fetch('/api')
   const timeline: Event[] = await data.json()
 
   return (
