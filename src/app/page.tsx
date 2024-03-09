@@ -1,4 +1,5 @@
 import dotenv from 'dotenv'
+import { InferGetServerSidePropsType } from 'next'
 dotenv.config()
 
 type Event = {
@@ -18,4 +19,3 @@ export default async function Home() {
     </div>
   );
 }
-

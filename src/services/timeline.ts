@@ -9,7 +9,7 @@ type Event = {
 export default class Timeline{
     async getData(){
         const timeline = await data
-        return timeline
+        return JSON.parse(JSON.stringify(timeline))
     }
 
     async listPeriods(){
