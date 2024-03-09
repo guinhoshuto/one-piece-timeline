@@ -9,9 +9,14 @@ type Event = {
     source: string
 }
 
-export default async function Home() {
+export async function getTimeline(){
   const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`)
   const timeline: Event[] = await data.json()
+  return timeline
+}
+
+export default async function Home() {
+  const timeline = await getTimeline()
 
   return (
     <div>
