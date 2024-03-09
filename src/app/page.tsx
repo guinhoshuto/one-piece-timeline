@@ -1,5 +1,8 @@
+'use client'
+
 import dotenv from 'dotenv'
 import { InferGetServerSidePropsType } from 'next'
+import { useEffect, useState } from 'react'
 dotenv.config()
 
 type Event = {
@@ -9,14 +12,16 @@ type Event = {
     source: string
 }
 
-export async function getTimeline(){
-  const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`)
-  const timeline: Event[] = await data.json()
-  return timeline
-}
+export default function Home() {
+  const [timeline, setTimeline] = useState<Event[]>([])
 
-export default async function Home() {
-  const timeline = await getTimeline()
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}`)
+      .then((res: Response) => res.json())
+      .then((tl: Event[]) => setTimeline(tl))
+
+  }, [])
+
 
   return (
     <div>
