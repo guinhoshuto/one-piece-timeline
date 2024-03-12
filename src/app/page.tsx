@@ -16,7 +16,7 @@ export default function Home() {
   const [timeline, setTimeline] = useState<Event[]>([])
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/dates`)
       .then((res: Response) => res.json())
       .then((tl: Event[]) => setTimeline(tl))
 
@@ -25,7 +25,7 @@ export default function Home() {
 
   return (
     <div>
-      {timeline.map((t: Event, i:number) => (<div key={i}>{t.date}</div>))}
+      {timeline.map((t: any, i:number) => (<div key={t.id}>{t.period} - {t.date}</div>))}
     </div>
   );
 }

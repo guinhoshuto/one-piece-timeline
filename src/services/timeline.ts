@@ -28,4 +28,28 @@ export default class Timeline{
         return periods
     }
 
+    async listDates(){
+        const timeline = await this.getData()
+        const datesList = [... new Set(timeline.map((t: Event) => t.date))]
+        const dates = datesList.map((d: string | unknown, i: number) => {
+            const date = timeline.filter((t: Event) => t.date === d)
+            return {
+                id: i,
+                period: date[0].period,
+                date: d,
+                event_count: date.length
+            }
+        })
+        return dates
+    }
+
+    async search(query: string){
+        const timeline = await this.getData()
+        const result: Event[] = []
+
+        timeline.forEach((event: Event) => {
+            if(event.description.toLowerCase().includes(query.toLowerCase())) result.push(event) 
+        })
+        return result
+    }
 }
